@@ -23,7 +23,7 @@ def add():
         print("Invalid Game Location")
         add()
 def default():
-    print("========================GAME LIST=================================")
+    print("===========================GAME LIST==============================")
     dir = os.listdir()
     dirList = [x.split('.')[0] for x in dir]
     for item in dirList:
