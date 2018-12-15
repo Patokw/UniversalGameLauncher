@@ -12,13 +12,16 @@ def add():
     path = os.path.join(name)
     target = (pathed)
     icon = (pathed)
-
-    shell = Dispatch('WScript.Shell')
-    shortcut = shell.CreateShortCut(path)
-    shortcut.Targetpath = target
-    shortcut.IconLocation = icon
-    shortcut.save()
-    default()
+    try:
+        shell = Dispatch('WScript.Shell')
+        shortcut = shell.CreateShortCut(path)
+        shortcut.Targetpath = target
+        shortcut.IconLocation = icon
+        shortcut.save()
+        default()
+    except:
+        print("Invalid Game Location")
+        add()
 def default():
     print("========================GAME LIST=================================")
     dir = os.listdir()
@@ -30,12 +33,14 @@ def default():
     while noError:
         awaitAction()
 def awaitAction():
-    command = str(input("Type Run to launch a game to launch a game, or Add To Add A Game: "))
-    if command.lower() == ("run"):
-        program = str(input("Name The Game You Want To Run: "))+".lnk"
-        os.system("start"+" "+program)
-    elif command.lower() ==("add"):
+    command = str(input("Type a game name to launch a game to launch a game, or Add To Add A Game: "))
+    if command.lower() == ("add"):
         add()
     else:
-        awaitAction()
+        try:
+            program = command+".lnk"
+            os.system("start"+" "+program)
+        except:
+            print("Game Not Found [Case Sensitive]")
+            awaitAction()
 default()
