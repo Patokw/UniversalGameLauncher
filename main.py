@@ -33,7 +33,7 @@ def default():
     while noError:
         awaitAction()
 def awaitAction():
-    command = str(input("<Add - Adds A Game To The List> <Remove - Removes A Game From The List> <GameName - Launches That Game>: "))
+    command = str(input(">>> "))
     if command.lower() == ("add"):
         add()
     elif command.lower() == ("remove"):
@@ -45,6 +45,9 @@ def awaitAction():
         except:
             print("Invalid Game Name")
             awaitAction()
+    elif command.lower() == ("help"):
+        print("<Add - Adds A Game To The List> <Remove - Removes A Game From The List> <GameName - Launches That Game>:")
+        awaitAction()
     else:
         try:
             program = command+".lnk"
