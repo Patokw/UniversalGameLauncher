@@ -33,12 +33,18 @@ def default():
     while noError:
         awaitAction()
 def awaitAction():
-    command = str(input("Type a game name to launch a game to launch a game, or Add To Add A Game: "))
+    command = str(input("<Add - Adds A Game To The List> <Remove - Removes A Game From The List> <GameName - Launches That Game>: "))
     if command.lower() == ("add"):
         add()
     elif command.lower() == ("remove"):
-        program(command+".lnk")
-        os.remove(program)
+        try:
+            file = str(input("What Game Do You Want To Remove? "))
+            program = (file+".lnk")
+            os.remove(program)
+            default()
+        except:
+            print("Invalid Game Name")
+            awaitAction()
     else:
         try:
             program = command+".lnk"
