@@ -1,3 +1,12 @@
 #Pseudo Code
 
-import things
+import gui_module
+import other modules
+
+list =  scan shortcut directory
+gui_list = gui_module.text(list)
+buttons = gui_module.buttonList(shortcut links)
+frame = gui_module.frame(gui_list,buttons)
+root = gui_module.root
+application = gui_module.start(frame,root)
+application()
