@@ -23,6 +23,6 @@ def add():
 def default():
     os.chdir("Games")
     dir = os.listdir()
-        for item in dir:
-            print (item)
+    for item in dir:
+        print (item)
 default()
