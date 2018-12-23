@@ -2,14 +2,12 @@
 #RobotCookie
 #15.12.18
 
-import tkinter, time, sys, os, csv, winshell
-from win32com.client import Dispatch
-os.chdir("Games")
+import time, sys, os
 
 def add():
     pathed = str(input("Input The Game's Locations Ex: C:\Program Files\GameFun\gun.exe: "))
     nameInput = str(input("What is the name of the game? "))
-    writefile = open("games.csv","a+")
+    writefile = open("games.csv","a")
     writefile.write(nameInput+","+pathed+"\n")
     writefile.close
     default()
@@ -31,8 +29,8 @@ def awaitAction():
         add()
     elif command.lower() == ("remove"):
         try:
-            file = str(input("What Game Do You Want To Remove? "))
-            program = (file+".lnk")
+            filea = str(input("What Game Do You Want To Remove? "))
+            program = (filea+".lnk")
             os.remove(program)
             default()
         except:
@@ -42,9 +40,10 @@ def awaitAction():
         print("<Add - Adds A Game To The List> <Remove - Removes A Game From The List> <GameName - Launches That Game>:")
         awaitAction()
     else:
-        csv_reader = csv.reader(open('games.csv', 'r'), delimiter=",")
-        for line in csv_reader:
-            if command == line[0]:
-                program = line[1]
+        file2 = open("games.csv","r")
+        for line in file2:
+            if command == line.split(",")[0]:
+                program = line.split(",")[1]
                 os.system("start"+" "+program)
+        file2.close
 default()
