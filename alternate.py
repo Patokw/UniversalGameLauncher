@@ -9,8 +9,8 @@ os.chdir("Games")
 def add():
     pathed = str(input("Input The Game's Locations Ex: C:\Program Files\GameFun\gun.exe: "))
     nameInput = str(input("What is the name of the game? "))
-    writefile = open("games.csv","a")
-    writefile.write(nameInput+","+pathed+","+"\n")
+    writefile = open("games.csv","a+")
+    writefile.write(nameInput+","+pathed+"\n")
     writefile.close
     default()
 def default():
@@ -20,8 +20,8 @@ def default():
     for line in file:
         value = line.split(",")
         print(value[0])
-    print("==================================================================")
     file.close
+    print("==================================================================")
     noError = True
     while noError:
         awaitAction()
