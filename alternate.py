@@ -5,30 +5,23 @@
 import tkinter, time, sys, os, csv, winshell
 from win32com.client import Dispatch
 os.chdir("Games")
+
 def add():
     pathed = str(input("Input The Game's Locations Ex: C:\Program Files\GameFun\gun.exe: "))
     nameInput = str(input("What is the name of the game? "))
-    name = (nameInput+".lnk")
-    path = os.path.join(name)
-    target = (pathed)
-    icon = (pathed)
-    try:
-        shell = Dispatch('WScript.Shell')
-        shortcut = shell.CreateShortCut(path)
-        shortcut.Targetpath = target
-        shortcut.IconLocation = icon
-        shortcut.save()
-        default()
-    except:
-        print("Invalid Game Location")
-        add()
+    writefile = open("games.csv","a")
+    writefile.write(nameInput+","+pathed+","+"\n")
+    writefile.close
+    default()
 def default():
     print("===========================GAME LIST==============================")
-    dir = os.listdir()
-    dirList = [x.split('.')[0] for x in dir]
-    for item in dirList:
-        print (item)
+    file = open("games.csv","r")
+    games = list()
+    for line in file:
+        value = line.split(",")
+        print(value[0])
     print("==================================================================")
+    file.close
     noError = True
     while noError:
         awaitAction()
@@ -49,10 +42,9 @@ def awaitAction():
         print("<Add - Adds A Game To The List> <Remove - Removes A Game From The List> <GameName - Launches That Game>:")
         awaitAction()
     else:
-        try:
-            program = command+".lnk"
-            os.system("start"+" "+program)
-        except:
-            print("Game Not Found")
-            awaitAction()
+        csv_reader = csv.reader(open('games.csv', 'r'), delimiter=",")
+        for line in csv_reader:
+            if command == line[0]:
+                program = line[1]
+                os.system("start"+" "+program)
 default()
