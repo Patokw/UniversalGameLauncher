@@ -20,6 +20,16 @@ def listadd():
     addition = str(input("Name The Task To Add: "))
     writefile.write(addition+","+"NO"+"\n")
     writefile.close
+def to_do():
+    list = open(todoPath, "r+")
+    print()
+    print("Task")
+    print("-----")
+    for item in list:
+        check = item.split(",")
+        print(check[0])
+    list.close
+    print("======")
 def default():
     print("===========================GAME LIST==============================")
     file = open("games.csv","r")
@@ -42,6 +52,18 @@ def awaitAction():
         awaitAction()
     elif command.lower() == ("addl"):
         listadd()
+    elif command.lower() == ("todo"):
+        try:
+            to_do()
+        except:
+            print("No Game Started!")
+            awaitAction()
+    elif command.lower() == ("clear"):
+        list = open(todoPath, "r+")
+        wlist = open(todoPath, "w+")
+        for item in list:
+            wlist.write("Clearing!")
+        list.close
     else:
         file2 = open("games.csv","r")
         for line in file2:
@@ -51,19 +73,24 @@ def awaitAction():
                 os.system("start"+" "+program)
                 try:
                     list = open(todoPath, "r+")
-                    print("Task | Checked")
+                    print()
+                    print("Task")
+                    print("-----")
                     for item in list:
                         check = item.split(",")
-                        print(check[0],"|",check[1])
+                        print(check[0])
                     list.close
+                    print("======")
                 except:
-                    with open(todoPath,"w") as create:
-                        list = open(todoPath, "r+")
-                        print("Task | Checked")
-                        for item in list:
-                            check = item.split(",")
-                            print(check[0],"|",check[1])
-                        list.close
-                        create.close
+                    list = open(todoPath, "r+")
+                    print()
+                    print("Task")
+                    print("-----")
+                    for item in list:
+                        check = item.split(",")
+                        print(check[0])
+                    list.close
+                    create.close
+                    print("======")
         file2.close
 default()
