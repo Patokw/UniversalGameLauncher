@@ -7,10 +7,12 @@ import time, sys, os
 def add():
     pathed = str(input("Input The Game's Locations Ex: C:\Program Files\GameFun\gun.exe: "))
     nameInput = str(input("What is the name of the game? "))
-    writefile = open("games.csv","a")
-    writefile.write(nameInput+","+pathed+"\n")
-    writefile.close
+    writing(nameInput,pathed)
     default()
+def writing(a,b):
+    writefile = open("games.csv","a")
+    writefile.write(a+","+b+"\n")
+    writefile.close
 def default():
     print("===========================GAME LIST==============================")
     file = open("games.csv","r")
