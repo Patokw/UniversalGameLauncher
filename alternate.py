@@ -82,6 +82,8 @@ def awaitAction():
                     list.close
                     print("======")
                 except:
+                    list = open(todoPath, "w")
+                    list.close
                     list = open(todoPath, "r+")
                     print()
                     print("Task")
