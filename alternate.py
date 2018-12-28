@@ -2,7 +2,7 @@
 #RobotCookie
 #15.12.18
 
-import time, sys, os
+import time, sys, os, subprocess
 
 def add():
     pathed = str(input("Input The Game's Locations Ex: C:\Program Files\GameFun\gun.exe: "))
@@ -68,9 +68,9 @@ def awaitAction():
         file2 = open("games.csv","r")
         for line in file2:
             if command == line.split(",")[0]:
-                program = line.split(",")[1]
+                program = str(line.split(",")[1])
                 todoPath = line.split(",")[2]
-                os.system("start"+" "+program)
+                subprocess.call([program])
                 try:
                     list = open(todoPath, "r+")
                     print()
