@@ -70,7 +70,7 @@ def awaitAction():
             if command == line.split(",")[0]:
                 program = str(line.split(",")[1])
                 todoPath = line.split(",")[2]
-                subprocess.call([program])
+                os.system("start"+" "+program)
                 try:
                     list = open(todoPath, "r+")
                     print()
