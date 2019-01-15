@@ -2,7 +2,7 @@
 #RobotCookie
 #15.12.18
 
-import time, sys, os, subprocess, reddit
+import time, sys, os, subprocess, praw, random
 
 def add():
     pathed = str(input("Input The Game's Locations Ex: C:\Program Files\GameFun\gun.exe: "))
@@ -43,7 +43,8 @@ def default():
     while noError:
         awaitAction()
 def memes():
-    reddit.meme(random) 
+    submissions = reddit.subreddit('copypasta').hot(limit=15)
+    print(submissions.random())
 def awaitAction():
     global todoPath
     command = str(input(">>> "))
